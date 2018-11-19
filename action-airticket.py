@@ -10,8 +10,8 @@ MQTT_PORT = 1883
 MQTT_ADDR = "{}:{}".format(MQTT_IP_ADDR, str(MQTT_PORT))
 
 
-INTENT_BOOK_FLIGHT = "book_flight"
-INTENT_AIRPORT_SELECTION = "airport_selection"
+INTENT_BOOK_FLIGHT = "normanchan888:book_flight"
+INTENT_AIRPORT_SELECTION = "normanchan888:airport_selection"
 
 
 def user_book_flight(hermes, intent_message):
