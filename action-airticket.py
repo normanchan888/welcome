@@ -33,7 +33,7 @@ def user_airport_selection(hermes, intent_message):
     if intent_message.slots.airport:
         airport = intent_message.slots.airport.first().value
 
-    hermes.publish_end_session(session_id, "Bye"))
+    hermes.publish_end_session(session_id, "Bye")
 
 
 def session_started(hermes, session_started_message):
