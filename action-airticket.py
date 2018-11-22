@@ -11,7 +11,7 @@ def intent_received(hermes, intent_message):
             depart_city = intent_message.slots.departcity.first().value
         if intent_message.slots.arrivecity:
             arrive_city = intent_message.slots.arrivecity.first().value
-        hermes.publish_continue_session(intent_message.session_id, "which airport", "normanchan888:airport_selection")
+        hermes.publish_continue_session(intent_message.session_id, "which airport", ["normanchan888:airport_selection"])
         
     elif intent_message.intent.intent_name == 'normanchan888:airport_selection' :
         if intent_message.slots.airport:
