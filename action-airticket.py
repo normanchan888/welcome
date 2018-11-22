@@ -9,5 +9,5 @@ def intent_received(hermes, intent_message):
 
     hermes.publish_end_session(intent_message.session_id, None)
 
-with Hermes('raspberrypi.local:1883') as h:
+with Hermes('10.81.0.223:1883') as h:
     h.subscribe_intents(intent_received).start()
