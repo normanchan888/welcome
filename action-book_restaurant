@@ -7,6 +7,7 @@ def intent_received(hermes, intent_message):
         print('Slot {} -> \n\tRaw: {} \tValue: {}'.format(slot_value, slot[0].raw_value, slot[0].slot_value.value.value))
 
     if intent_message.intent.intent_name == 'normanchan888:BookRestaurant' :
+        global BookRestaurant_saved_session_id
         if intent_message.slots.booked_restaurant:
             booked_restaurant = intent_message.slots.booked_restaurant.first().value
         BookRestaurant_saved_session_id = intent_message.session_id
