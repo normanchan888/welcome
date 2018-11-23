@@ -21,5 +21,5 @@ def intent_received(hermes, intent_message):
             BookingTime = intent_message.slots.BookingTime.first().value
         hermes.publish_end_session(intent_message.session_id, "I have booked the table")
 
-with Hermes("10.81.0.34:1883") as h:
+with Hermes("localhost:1883") as h:
     h.subscribe_intents(intent_received).start()
