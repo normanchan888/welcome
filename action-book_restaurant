@@ -14,7 +14,7 @@ def intent_received(hermes, intent_message):
         if intent_message.slots.booked_restaurant:
             booked_restaurant = intent_message.slots.booked_restaurant.first().value
         BookRestaurant_saved_session_id = intent_message.session_id
-        hermes.publish_continue_session(intent_message.session_id, "For how many persons", ["normanchan888:SetNumOfPersons"])
+        hermes.publish_continue_session(intent_message.session_id, "For how many people", ["normanchan888:SetNumOfPersons"])
 
     elif ((intent_message.intent.intent_name == 'normanchan888:SetNumOfPersons') and (intent_message.session_id == BookRestaurant_saved_session_id)):
         if intent_message.slots.NumOfPersons:
