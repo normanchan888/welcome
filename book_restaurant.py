@@ -14,12 +14,12 @@ def intent_received(hermes, intent_message):
     elif intent_message.intent.intent_name == 'normanchan888:SetNumOfPersons' :
         if intent_message.slots.NumOfPersons:
             NumOfPersons = intent_message.slots.NumOfPersons.first().value
-        hermes.publish_continue_session(intent_message.session_id, "For how many persons", ["normanchan888:SetNumOfPersons"])
+        hermes.publish_continue_session(intent_message.session_id, "For what time", ["normanchan888:SetBookingTime"])
         
     elif intent_message.intent.intent_name == 'normanchan888:SetBookingTime' :
         if intent_message.slots.BookingTime:
             BookingTime = intent_message.slots.BookingTime.first().value
-        hermes.publish_end_session(intent_message.session_id, "I have booked a table for %d at %s" % NumOfPersons, % booked_restaurant)
+        hermes.publish_end_session(intent_message.session_id, "I have booked the table")
 
 with Hermes("10.81.0.34:1883") as h:
     h.subscribe_intents(intent_received).start()
