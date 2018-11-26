@@ -24,7 +24,7 @@ def intent_received(hermes, intent_message):
     elif ((intent_message.intent.intent_name == 'normanchan888:SetBookingTime') and (intent_message.session_id == BookRestaurant_saved_session_id)):
         if intent_message.slots.BookingTime:
             BookingTime = intent_message.slots.BookingTime.first().value
-        hermes.publish_end_session(intent_message.session_id, "I have booked the table at {0} for a party of {1} for {2}".format(booked_restaurant,int(NumOfPersons),BookingTime.split(' ')[1][:5]))
+        hermes.publish_end_session(intent_message.session_id, "I have reserved a table at {0} for a party of {1} for {2}. I've also arranged for a car to pick you up an hour earlier at {3). We are now setting sail with an estimated travel time of 3 hours.".format(booked_restaurant,int(NumOfPersons),BookingTime.split(' ')[1][:5]), ,(BookingTime.split(' ')[1][:5]-1)))
 
 with Hermes("angelmaster.local:1883") as h:
     h.subscribe_intents(intent_received).start()
