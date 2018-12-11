@@ -1,0 +1,35 @@
+#!/usr/bin/env python2
+from hermes_python.hermes import Hermes
+
+def intent_received(hermes, intent_message):
+    print('Intent {}'.format(intent_message.intent.intent_name))
+    for (slot_value, slot) in intent_message.slots.items():
+        print('Slot {} -> \n\tRaw: {} \tValue: {}'.format(slot_value, slot[0].raw_value, slot[0].slot_value.value.value))
+
+    global booked_restaurant
+    global NumOfPersons
+    global BookingTime
+    if intent_message.intent.intent_name == 'normanchan888:Welcome' :
+        global Welcome_saved_session_id
+#        if intent_message.slots.booked_restaurant:
+#            booked_restaurant = intent_message.slots.booked_restaurant.first().value
+        Welcome_saved_session_id = intent_message.session_id
+        hermes.publish_continue_session(intent_message.session_id, "What can I help you with?", ["normanchan888:app_weather_WeatherCondition"])
+
+    elif ((intent_message.intent.intent_name == 'normanchan888:app_weather_WeatherCondition') and (intent_message.session_id == Welcome_saved_session_id)):
+#        if intent_message.slots.NumOfPersons:
+#            NumOfPersons = intent_message.slots.NumOfPersons.first().value
+        hermes.publish_continue_session(intent_message.session_id, "Would you like to plan a trip", ["normanchan888:app_concierge_PlanTrip"])
+
+    elif ((intent_message.intent.intent_name == 'normanchan888:app_concierge_PlanTrip') and (intent_message.session_id == Welcome_saved_session_id)):
+#        if intent_message.slots.NumOfPersons:
+#            NumOfPersons = intent_message.slots.NumOfPersons.first().value
+        hermes.publish_continue_session(intent_message.session_id, "I will inform the captain to set sail to your chosen destination. Here is a list of restaurants in the area", ["normanchan888:BookRestaurant"])
+    
+    elif ((intent_message.intent.intent_name == 'normanchan888:BookRestaurant') and (intent_message.session_id == Welcome_saved_session_id)):
+#        if intent_message.slots.BookingTime:
+#            BookingTime = intent_message.slots.BookingTime.first().value
+        hermes.publish_end_session(intent_message.session_id, "I will now request a reservation at your chosen restaurant")
+
+with Hermes("angelmaster.local:1883") as h:
+    h.subscribe_intents(intent_received).start()
