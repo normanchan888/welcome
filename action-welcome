@@ -24,12 +24,13 @@ def intent_received(hermes, intent_message):
     elif ((intent_message.intent.intent_name == 'normanchan888:app_concierge_PlanTrip') and (intent_message.session_id == Welcome_saved_session_id)):
 #        if intent_message.slots.NumOfPersons:
 #            NumOfPersons = intent_message.slots.NumOfPersons.first().value
-        hermes.publish_continue_session(intent_message.session_id, "I am showing you the destinations now. I will inform the captain to set sail to your chosen destination. Here is a list of restaurants in the area", ["normanchan888:BookRestaurant"])
-    
-    elif ((intent_message.intent.intent_name == 'normanchan888:BookRestaurant') and (intent_message.session_id == Welcome_saved_session_id)):
+#        hermes.publish_continue_session(intent_message.session_id, "I am showing you the destinations now. I will inform the captain to set sail to your chosen destination. Here is a list of restaurants in the area", ["normanchan888:BookRestaurant"])
+        hermes.publish_end_session(intent_message.session_id, "I am showing you the destinations now. I will inform the captain to set sail to your chosen destination. Here is a list of restaurants in the area")
+
+#    elif ((intent_message.intent.intent_name == 'normanchan888:BookRestaurant') and (intent_message.session_id == Welcome_saved_session_id)):
 #        if intent_message.slots.BookingTime:
 #            BookingTime = intent_message.slots.BookingTime.first().value
-        hermes.publish_end_session(intent_message.session_id, "I will now request a reservation at your chosen restaurant")
+#        hermes.publish_end_session(intent_message.session_id, "I will now request a reservation at your chosen restaurant")
 
 with Hermes("angelmaster.local:1883") as h:
     h.subscribe_intents(intent_received).start()
