@@ -25,7 +25,7 @@ def intent_received(hermes, intent_message):
 #        if intent_message.slots.NumOfPersons:
 #            NumOfPersons = intent_message.slots.NumOfPersons.first().value
 #        hermes.publish_continue_session(intent_message.session_id, "I am showing you the destinations now. I will inform the captain to set sail to your chosen destination. Here is a list of restaurants in the area", ["normanchan888:BookRestaurant"])
-        hermes.publish_end_session(intent_message.session_id, "I am showing you the destinations now. I will inform the captain to set sail to your chosen destination. Here is a list of restaurants in the area")
+        hermes.publish_end_session(intent_message.session_id, "I am showing you the destinations now.")
 
 #    elif ((intent_message.intent.intent_name == 'normanchan888:BookRestaurant') and (intent_message.session_id == Welcome_saved_session_id)):
 #        if intent_message.slots.BookingTime:
