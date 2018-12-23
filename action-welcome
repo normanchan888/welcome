@@ -66,7 +66,7 @@ def intent_received(hermes, intent_message):
             shopping_category = intent_message.slots.shopping_category.first().value
         hermes.publish_continue_session(intent_message.session_id, "Here is a list of {}".format(shopping_category), ["normanchan888:ShoppingItem", "normanchan888:CancelMultiTurn"])
     elif ((intent_message.intent.intent_name == 'normanchan888:ShoppingItem') and (intent_message.session_id == ShoppingCategory_saved_session_id)):
-        hermes.publish_end_session(intent_message.session_id, "I am placing your order now")
+        hermes.publish_continue_session(intent_message.session_id, "I am placing your order now. Is there anything else you need?", ["normanchan888:ShoppingCategory", "normanchan888:ShoppingItem", "normanchan888:CancelMultiTurn"])
 #   Non-Multi-Turn handling
     elif (intent_message.intent.intent_name == 'normanchan888:ShoppingItem') :
         hermes.publish_end_session(intent_message.session_id, "I am placing your order now")
