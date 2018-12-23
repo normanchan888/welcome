@@ -16,7 +16,7 @@ def intent_received(hermes, intent_message):
     global NumOfPersons
     global BookingTime
     global ordered_item
-    global shoppin_category
+    global shopping_category
     global shopping_item
     if intent_message.intent.intent_name == 'normanchan888:Welcome' :
         global Welcome_saved_session_id
@@ -54,8 +54,8 @@ def intent_received(hermes, intent_message):
         global ShoppingCategory_saved_session_id
 	ShoppingCategory_saved_session_id = intent_message.session_id
         if intent_message.slots.item:
-            shoppin_category = intent_message.slots.item.first().value
-        hermes.publish_continue_session(intent_message.session_id, "Here is a list of {}".format(shoppin_category), ["normanchan888:ShoppingItem", "normanchan888:CancelMultiTurn"])
+            shopping_category = intent_message.slots.item.first().value
+        hermes.publish_continue_session(intent_message.session_id, "Here is a list of {}".format(shopping_category), ["normanchan888:ShoppingItem", "normanchan888:CancelMultiTurn"])
     elif ((intent_message.intent.intent_name == 'normanchan888:ShoppingItem') and (intent_message.session_id == ShoppingCategory_saved_session_id)):
         hermes.publish_end_session(intent_message.session_id, "I am placing your order now")
 #   Non-Multi-Turn handling
