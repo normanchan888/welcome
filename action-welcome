@@ -18,8 +18,12 @@ def intent_received(hermes, intent_message):
     global ordered_item
     global shopping_category
     global shopping_item
+    global Welcome_saved_session_id
+    global OrderBeer_saved_session_id
+    global ShoppingCategory_saved_session_id
+	
     if intent_message.intent.intent_name == 'normanchan888:Welcome' :
-        global Welcome_saved_session_id
+
         Welcome_saved_session_id = intent_message.session_id
         if intent_message.slots.booked_restaurant:
             booked_restaurant = intent_message.slots.booked_restaurant.first().value
@@ -27,7 +31,7 @@ def intent_received(hermes, intent_message):
 #        hermes.publish_continue_session(intent_message.session_id, "Hello {}, welcome aboard the Adonis. What can I help you with?".format(presenter_name.state), ["normanchan888:app_weather_WeatherCondition"])
 
     elif intent_message.intent.intent_name == 'normanchan888:OrderBeer' :
-        global OrderBeer_saved_session_id
+
 	OrderBeer_saved_session_id = intent_message.session_id
         if intent_message.slots.item:
             ordered_item = intent_message.slots.item.first().value
@@ -51,7 +55,7 @@ def intent_received(hermes, intent_message):
 
 #   Shopping Multi-turn dialogue for swimsuit and sunscreen	
     elif intent_message.intent.intent_name == 'normanchan888:ShoppingCategory' :
-        global ShoppingCategory_saved_session_id
+
 	ShoppingCategory_saved_session_id = intent_message.session_id
         if intent_message.slots.shopping_category:
             shopping_category = intent_message.slots.shopping_category.first().value
