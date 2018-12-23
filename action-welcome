@@ -1,11 +1,11 @@
 #!/usr/bin/env python2
 from hermes_python.hermes import Hermes
-import sys
-sys.path.append('/srv/homeassistant/lib/python3.5/site-packages')
-import homeassistant.remote as remote
+#import sys
+#sys.path.append('/srv/homeassistant/lib/python3.5/site-packages')
+#import homeassistant.remote as remote
 
-api = remote.API('127.0.0.1', '12345678')
-presenter_name = remote.get_state(api, 'input_select.presenter_name')
+#api = remote.API('127.0.0.1', '12345678')
+#presenter_name = remote.get_state(api, 'input_select.presenter_name')
 
 Welcome_saved_session_id = ''
 OrderBeer_saved_session_id = ''
@@ -32,8 +32,8 @@ def intent_received(hermes, intent_message):
         Welcome_saved_session_id = intent_message.session_id
         if intent_message.slots.booked_restaurant:
             booked_restaurant = intent_message.slots.booked_restaurant.first().value
-#        hermes.publish_continue_session(intent_message.session_id, "Hello there, welcome aboard the Adonis. What can I help you with?", ["normanchan888:app_weather_WeatherCondition", "normanchan888:CancelMultiTurn"])
-        hermes.publish_continue_session(intent_message.session_id, "Hello {}, welcome aboard the Adonis. What can I help you with?".format(presenter_name.state), ["normanchan888:app_weather_WeatherCondition"])
+        hermes.publish_continue_session(intent_message.session_id, "Hello there, welcome aboard the Adonis. What can I help you with?", ["normanchan888:app_weather_WeatherCondition", "normanchan888:CancelMultiTurn"])
+#        hermes.publish_continue_session(intent_message.session_id, "Hello {}, welcome aboard the Adonis. What can I help you with?".format(presenter_name.state), ["normanchan888:app_weather_WeatherCondition"])
 
     elif intent_message.intent.intent_name == 'normanchan888:OrderBeer' :
 
