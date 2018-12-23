@@ -6,6 +6,9 @@ from hermes_python.hermes import Hermes
 
 #api = remote.API('127.0.0.1', '12345678')
 #presenter_name = remote.get_state(api, 'input_select.presenter_name')
+Welcome_saved_session_id = ""
+OrderBeer_saved_session_id = ""
+ShoppingCategory_saved_session_id = ""
 
 def intent_received(hermes, intent_message):
     print('Intent {}'.format(intent_message.intent.intent_name))
@@ -18,9 +21,7 @@ def intent_received(hermes, intent_message):
     global ordered_item
     global shopping_category
     global shopping_item
-    global Welcome_saved_session_id = 0
-    global OrderBeer_saved_session_id = 0
-    global ShoppingCategory_saved_session_id = 0
+
 	
     if intent_message.intent.intent_name == 'normanchan888:Welcome' :
 
