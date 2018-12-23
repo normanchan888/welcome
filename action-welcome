@@ -24,14 +24,14 @@ def intent_received(hermes, intent_message):
         hermes.publish_continue_session(intent_message.session_id, "Hello there, welcome aboard the Adonis. What can I help you with?", ["normanchan888:app_weather_WeatherCondition", "normanchan888:CancelMultiTurn"])
 #        hermes.publish_continue_session(intent_message.session_id, "Hello {}, welcome aboard the Adonis. What can I help you with?".format(presenter_name.state), ["normanchan888:app_weather_WeatherCondition"])
 
-    elif intent_message.intent.intent_name == 'normanchan888:app_food_OrderOutOfStockItem' :
-        global app_food_OrderOutOfStockItem_saved_session_id
-	app_food_OrderOutOfStockItem_saved_session_id = intent_message.session_id
+    elif intent_message.intent.intent_name == 'normanchan888:OrderBeer' :
+        global OrderBeer_saved_session_id
+	OrderBeer_saved_session_id = intent_message.session_id
         if intent_message.slots.item:
             ordered_item = intent_message.slots.item.first().value
         hermes.publish_continue_session(intent_message.session_id, "I have ordered you a {} from the galley. Is there anything else you want?".format(ordered_item), ["normanchan888:StartRelaxMode", "normanchan888:CancelMultiTurn"])
 
-    elif ((intent_message.intent.intent_name == 'normanchan888:StartRelaxMode') and (intent_message.session_id == app_food_OrderOutOfStockItem_saved_session_id)):
+    elif ((intent_message.intent.intent_name == 'normanchan888:StartRelaxMode') and (intent_message.session_id == OrderBeer_saved_session_id)):
         hermes.publish_end_session(intent_message.session_id, "activating relaxation mode now")
 
     elif ((intent_message.intent.intent_name == 'normanchan888:app_weather_WeatherCondition') and (intent_message.session_id == Welcome_saved_session_id)):
@@ -49,7 +49,7 @@ def intent_received(hermes, intent_message):
 #   Handling "No Thanks" during Welcome and Order Beer multi-turn dialogues	
     elif ((intent_message.intent.intent_name == 'normanchan888:CancelMultiTurn') and (intent_message.session_id == Welcome_saved_session_id)):
         hermes.publish_end_session(intent_message.session_id, "OK")
-    elif ((intent_message.intent.intent_name == 'normanchan888:CancelMultiTurn') and (intent_message.session_id == app_food_OrderOutOfStockItem_saved_session_id)):
+    elif ((intent_message.intent.intent_name == 'normanchan888:CancelMultiTurn') and (intent_message.session_id == OrderBeer_saved_session_id)):
         hermes.publish_end_session(intent_message.session_id, "OK")
  
 #    elif ((intent_message.intent.intent_name == 'normanchan888:BookRestaurant') and (intent_message.session_id == Welcome_saved_session_id)):
