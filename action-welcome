@@ -64,11 +64,11 @@ def intent_received(hermes, intent_message):
 	ShoppingCategory_saved_session_id = intent_message.session_id
         if intent_message.slots.shopping_category:
             shopping_category = intent_message.slots.shopping_category.first().value
-        hermes.publish_continue_session(intent_message.session_id, "Here is a list of {}".format(shopping_category), ["normanchan888:ShoppingItem", "normanchan888:CancelMultiTurn"])
-    elif ((intent_message.intent.intent_name == 'normanchan888:ShoppingItem') and (intent_message.session_id == ShoppingCategory_saved_session_id)):
-        hermes.publish_continue_session(intent_message.session_id, "I am placing your order now. Is there anything else you need?", ["normanchan888:app_concierge_ShoppingCategory", "normanchan888:ShoppingItem", "normanchan888:CancelMultiTurn"])
+        hermes.publish_continue_session(intent_message.session_id, "Here is a list of {}".format(shopping_category), ["normanchan888:app_concierge_ShoppingItem", "normanchan888:CancelMultiTurn"])
+    elif ((intent_message.intent.intent_name == 'normanchan888:app_concierge_ShoppingItem') and (intent_message.session_id == ShoppingCategory_saved_session_id)):
+        hermes.publish_continue_session(intent_message.session_id, "I am placing your order now. Is there anything else you need?", ["normanchan888:app_concierge_ShoppingCategory", "normanchan888:app_concierge_ShoppingItem", "normanchan888:CancelMultiTurn"])
 #   Non-Multi-Turn handling
-    elif (intent_message.intent.intent_name == 'normanchan888:ShoppingItem') :
+    elif (intent_message.intent.intent_name == 'normanchan888:app_concierge_ShoppingItem') :
         hermes.publish_end_session(intent_message.session_id, "I am placing your order now")
 
 #   Handling "No Thanks" during Welcome and Order Beer multi-turn dialogues	
