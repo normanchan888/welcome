@@ -28,7 +28,7 @@ def intent_received(hermes, intent_message):
     global ShoppingCategory_saved_session_id
     global app_weather_WeatherCondition_saved_session_id
 
-'''	
+"""
     if intent_message.intent.intent_name == 'normanchan888:Welcome' :
        
         Welcome_saved_session_id = intent_message.session_id
@@ -36,7 +36,7 @@ def intent_received(hermes, intent_message):
             booked_restaurant = intent_message.slots.booked_restaurant.first().value
         hermes.publish_continue_session(intent_message.session_id, "Hello there, welcome aboard the Adonis. What can I help you with?", ["normanchan888:app_weather_WeatherCondition", "normanchan888:CancelMultiTurn"])
 #        hermes.publish_continue_session(intent_message.session_id, "Hello {}, welcome aboard the Adonis. What can I help you with?".format(presenter_name.state), ["normanchan888:app_weather_WeatherCondition"])
-'''
+"""
     if intent_message.intent.intent_name == 'normanchan888:app_weather_WeatherCondition' :
         app_weather_WeatherCondition_saved_session_id = intent_message.session_id
         hermes.publish_continue_session(intent_message.session_id, "It is sunny today and the temperature is 75 degrees. Would you like to plan a trip?", ["normanchan888:app_concierge_PlanTrip", "normanchan888:CancelMultiTurn"])
@@ -50,14 +50,14 @@ def intent_received(hermes, intent_message):
 
     elif ((intent_message.intent.intent_name == 'normanchan888:StartRelaxMode') and (intent_message.session_id == OrderBeer_saved_session_id)):
         hermes.publish_end_session(intent_message.session_id, "activating relaxation mode now")
-'''
+"""
     elif ((intent_message.intent.intent_name == 'normanchan888:app_weather_WeatherCondition') and (intent_message.session_id == Welcome_saved_session_id)):
         hermes.publish_continue_session(intent_message.session_id, "It is sunny today and the temperature is 75 degrees. Would you like to plan a trip", ["normanchan888:app_concierge_PlanTrip", "normanchan888:CancelMultiTurn"])
 		
 #   Non-Multi-Turn handling
     elif (intent_message.intent.intent_name == 'normanchan888:app_weather_WeatherCondition') :
         hermes.publish_end_session(intent_message.session_id, "It is sunny today and the temperature is 75 degrees.")
-'''
+"""
 		
     elif ((intent_message.intent.intent_name == 'normanchan888:app_concierge_PlanTrip') and (intent_message.session_id == app_weather_WeatherCondition_saved_session_id)):
         hermes.publish_end_session(intent_message.session_id, "I am showing you the destinations now.")
