@@ -37,7 +37,7 @@ def intent_received(hermes, intent_message):
             # booked_restaurant = intent_message.slots.booked_restaurant.first().value
         # hermes.publish_continue_session(intent_message.session_id, "Hello there, welcome aboard the Adonis. What can I help you with?", ["normanchan888:app_weather_WeatherCondition", "normanchan888:CancelMultiTurn"])
 #         hermes.publish_continue_session(intent_message.session_id, "Hello {}, welcome aboard the Adonis. What can I help you with?".format(presenter_name.state), ["normanchan888:app_weather_WeatherCondition"])
-    if intent_message.intent.probability < 0.7:
+    if intent_message.intent.probability < 0.3:
         sent_cmd = '/usr/bin/mosquitto_pub -h localhost -t "hermes/audioServer/'+ intent_message.site_id + '/playBytes/8ewnjksdf093jb42" -f /usr/share/snips/assistant/custom_dialogue/sound/error.wav'
         subprocess.Popen(sent_cmd, shell=True)
         hermes.publish_end_session(intent_message.session_id, "")
