@@ -44,14 +44,14 @@ def intent_received(hermes, intent_message):
 
     elif intent_message.intent.intent_name == 'normanchan888:app_weather_WeatherConditionCA' :
         app_weather_WeatherConditionCA_saved_session_id = intent_message.session_id
-        hermes.publish_continue_session(intent_message.session_id, "It is sunny today in California. Would you like to plan a trip?", ["normanchan888:app_concierge_PlanTrip", "normanchan888:CancelMultiTurn"])
+        hermes.publish_continue_session(intent_message.session_id, "It is sunny today in California. Would you like to plan a trip?", ["normanchan888:app_concierge_PlanTrip", "normanchan888:CancelMultiTurn"], "", False)
 
     elif intent_message.intent.intent_name == 'normanchan888:OrderBeer' :
 
         OrderBeer_saved_session_id = intent_message.session_id
         if intent_message.slots.item:
             ordered_item = intent_message.slots.item.first().value
-        hermes.publish_continue_session(intent_message.session_id, "I have ordered you a {} from the galley. Is there anything else you want?".format(ordered_item), ["normanchan888:StartRelaxMode", "normanchan888:CancelMultiTurn"])
+        hermes.publish_continue_session(intent_message.session_id, "I have ordered you a {} from the galley. Is there anything else you want?".format(ordered_item), ["normanchan888:StartRelaxMode", "normanchan888:CancelMultiTurn"], "", False)
 
     elif ((intent_message.intent.intent_name == 'normanchan888:StartRelaxMode') and (intent_message.session_id == OrderBeer_saved_session_id)):
         hermes.publish_end_session(intent_message.session_id, "")
@@ -77,9 +77,9 @@ def intent_received(hermes, intent_message):
         ShoppingCategory_saved_session_id = intent_message.session_id
         if intent_message.slots.shopping_category:
             shopping_category = intent_message.slots.shopping_category.first().value
-        hermes.publish_continue_session(intent_message.session_id, "Here is a list of {}. What would you like?".format(shopping_category), ["normanchan888:app_concierge_ShoppingItem", "normanchan888:CancelMultiTurn"])
+        hermes.publish_continue_session(intent_message.session_id, "Here is a list of {}. What would you like?".format(shopping_category), ["normanchan888:app_concierge_ShoppingItem", "normanchan888:CancelMultiTurn"], "", False)
     elif ((intent_message.intent.intent_name == 'normanchan888:app_concierge_ShoppingItem') and (intent_message.session_id == ShoppingCategory_saved_session_id)):
-        hermes.publish_continue_session(intent_message.session_id, "I am placing your order now. Is there anything else you need?", ["normanchan888:app_concierge_ShoppingCategory", "normanchan888:app_concierge_ShoppingItem", "normanchan888:CancelMultiTurn"])
+        hermes.publish_continue_session(intent_message.session_id, "I am placing your order now. Is there anything else you need?", ["normanchan888:app_concierge_ShoppingCategory", "normanchan888:app_concierge_ShoppingItem", "normanchan888:CancelMultiTurn"], "", False)
 #   Non-Multi-Turn handling
     elif (intent_message.intent.intent_name == 'normanchan888:app_concierge_ShoppingItem') :
         hermes.publish_end_session(intent_message.session_id, "I am placing your order now")
